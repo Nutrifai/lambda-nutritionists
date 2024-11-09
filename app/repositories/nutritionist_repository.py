@@ -25,11 +25,12 @@ class NutritionistRepository:
             )
         return available_times
 
-    def add_nutritionist(self, nutritionist_id, name, available_times):
+    def add_nutritionist(self, nutritionist_id, name, available_times, profile_pic):
         self.table.put_item(
             Item={
                 'nutriId': nutritionist_id,
                 'name': name,
-                'availableTimes': available_times
+                'availableTimes': available_times,
+                'profilePic': profile_pic
             }
         )

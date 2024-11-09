@@ -66,11 +66,12 @@ def add_nutritionist():
     nutritionist_id = body.get("nutriId")
     name = body.get("name")
     available_times = body.get("availableTimes", [])
+    profile_pic = body.get("profilePic") # base64 encoded image
 
-    if not nutritionist_id or not name:
-        return create_response(400, {"error": "nutriId and name are required"})
+    if not nutritionist_id or not name or not profile_pic:
+        return create_response(400, {"error": "nutriId, name and profilePic are required"})
 
-    result = __nutritionist_service.add_nutritionist(nutritionist_id, name, available_times)
+    result = __nutritionist_service.add_nutritionist(nutritionist_id, name, available_times, profile_pic)
     return create_response(201, result)
 
 

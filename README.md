@@ -5,6 +5,7 @@ This repository contains an AWS Lambda function that handles scheduling actions 
 
 - Fetch a list of nutritionists and their available time slots.
 - Book a time slot for a specific nutritionist and update their availability.
+- Create a new nutritionist profile
 - Serverless architecture using AWS Lambda.
 - Integration with DynamoDB for storing nutritionist data and time slots.
 
@@ -58,6 +59,41 @@ This repository contains an AWS Lambda function that handles scheduling actions 
   "message": "Booking confirmed."
 }
 ```
+
+---
+
+### **3. Create new nutritionist profile**
+
+**Endpoint:** `/nutritionists/create`  
+**Method:** `POST`
+
+**Request Body:**
+```json
+{
+  "nutriId": "789",
+  "name": "Dr. Ana Pereira",
+  "availableTimes": [
+    "2024-11-12T08:00:00Z",
+    "2024-11-12T14:00:00Z"
+  ]
+}
+
+```
+
+**Response example:**
+```json
+{
+  "message": "New nutritionist added successfully.",
+  "nutriId": "789",
+  "name": "Dr. Ana Pereira",
+  "availableTimes": [
+    "2024-11-12T08:00:00Z",
+    "2024-11-12T14:00:00Z"
+  ]
+}
+
+```
+---
 
 ## Requirements
 

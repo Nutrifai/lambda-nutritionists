@@ -14,11 +14,12 @@ class NutritionistService:
             "updatedAvailability": updated_availability
         }
 
-    def add_nutritionist(self, nutritionist_id, name, available_times):
-        self.repository.add_nutritionist(nutritionist_id, name, available_times)
+    def add_nutritionist(self, nutritionist_id, name, available_times, profile_pic):
+        self.repository.add_nutritionist(nutritionist_id, name, available_times, profile_pic)
         return {
             "message": "New nutritionist added successfully.",
             "nutriId": nutritionist_id,
             "name": name,
-            "availableTimes": available_times
+            "availableTimes": available_times,
+            "profilePic": profile_pic
         }
