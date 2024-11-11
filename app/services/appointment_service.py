@@ -12,8 +12,8 @@ class AppointmentService:
 
         return appointments
 
-    def post_appointments(self, body):
-        new_appointment = self.repository.create_item(body={**body, "appointmentId": str(uuid.uuid4())})
+    def post_appointments(self, body, nutriId):
+        new_appointment = self.repository.create_item(body={**body, "nutriId": nutriId, "appointmentId": str(uuid.uuid4())})
 
         return new_appointment
 

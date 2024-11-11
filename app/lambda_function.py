@@ -42,9 +42,9 @@ def get_nutritionists():
 def get_appointment():
     return __appointment_service.get_appointments()
 
-@router.post("/appointments")
-def post_appointment():
-    return __appointment_service.post_appointments(body=resolver.current_event.body)
+@router.post("/nutritionists/<nutriId>/appointments")
+def post_appointment(nutriId):
+    return __appointment_service.post_appointments(body=resolver.current_event.body, nutriId=nutriId)
 
 @router.put("/nutritionists/<nutriId>/appointments/<appointmentId>")
 def put_appointment(nutriId, appointmentId):
