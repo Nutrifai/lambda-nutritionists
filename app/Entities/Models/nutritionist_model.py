@@ -4,5 +4,5 @@ class NutritionistModel(TableModel):
     userId: str
     email: str
     password: str
-    is_nutri: bool
-    profile_pic_path: str
+    isNutri: bool
+    profilePicPath: str
