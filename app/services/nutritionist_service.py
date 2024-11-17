@@ -26,7 +26,7 @@ class NutritionistService:
             # setar as consultas do nutricionista
 
             # recuperar as consultas
-            appointments = self.appointment_service.get_appointments()
+            appointments = self.appointment_service.get_appointments(query_params={"onlyAvailable": "true"})
 
             # para cada nutricionista, buscamos se o id do nutricionista é igual ao da consulta
             for nutri in nutris:

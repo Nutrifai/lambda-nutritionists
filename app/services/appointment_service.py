@@ -1,5 +1,6 @@
 from repositories.base_table_repository import TableRepository
 from Entities.Tables.appointment_table import AppointmentTable
+from boto3.dynamodb.conditions import Attr
 import uuid
 
 class AppointmentService:
@@ -7,8 +8,13 @@ class AppointmentService:
         # self.repository = NutritionistRepository()
         self.repository = TableRepository(table=AppointmentTable())
 
-    def get_appointments(self):
-        appointments = self.repository.get_all()
+    def get_appointments(self, query_params={}):
+        params = {}
+
+        if query_params.get("onlyAvailable", "false").lower() == "true":
+            params["filters"] = Attr("patientId").eq("")
+        
+        appointments = self.repository.get_all(**params)
 
         return appointments
 

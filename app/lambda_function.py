@@ -3,6 +3,7 @@ from aws_lambda_powertools.event_handler import APIGatewayRestResolver, CORSConf
 from aws_lambda_powertools.event_handler.api_gateway import Router
 from services.nutritionist_service import NutritionistService
 from services.appointment_service import AppointmentService
+from utils.get_user_info import get_user_info
 
 # CORS configuration settings for handling CORS securely
 cors_config = CORSConfig(allow_credentials=True)
@@ -50,6 +51,11 @@ def post_appointment(nutriId):
 def put_appointment(nutriId, appointmentId):
     return __appointment_service.put_appointments(body=resolver.current_event.body, nutriId=nutriId, appointmentId=appointmentId)
 
+@router.put("/nutritionists/<nutriId>/appointments/<appointmentId>/book")
+def put_appointment_book(nutriId, appointmentId):
+    user_info = router.context.get("user")
+    return __appointment_service.put_appointments(body={'patientId': user_info.userId}, nutriId=nutriId, appointmentId=appointmentId)
+
 
 # Initialize APIGatewayRestResolver with CORS
 resolver = APIGatewayRestResolver(cors=cors_config)
@@ -65,6 +71,8 @@ def lambda_handler(event, context=None):
         dict: The response dictionary to be returned to API Gateway.
     """
     __setup_services()
+
+    resolver.append_context(user=get_user_info(event))
 
     # Parse stringified JSON body if present
     if "body" in event and type(event["body"]) is str:

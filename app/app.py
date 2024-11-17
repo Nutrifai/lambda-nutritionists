@@ -24,7 +24,7 @@ def make_api_gateway_event():
                     "email": "generic_user@email.com",
                     "expireOn": 1234567890,
                     "sessionId": "session_hash",
-                    "userId": "teste",
+                    "userId": "isa",
                 }
             },
             "stage": STAGE,
@@ -48,6 +48,7 @@ def make_api_gateway_event():
 @app.route("/<string:endpoint>/<string:pk>", methods=['GET', 'PUT', 'DELETE', 'OPTIONS', 'POST'])
 @app.route("/<string:endpoint>/<string:pk>/<string:sk>", methods=['GET', 'PUT', 'DELETE', 'OPTIONS', 'POST'])
 @app.route("/<string:endpoint>/<string:pk>/<string:endpoint2>/<string:sk>", methods=['GET', 'PUT', 'DELETE', 'OPTIONS', 'POST'])
+@app.route("/<string:endpoint>/<string:pk>/<string:endpoint2>/<string:sk>/<string:endpoint3>", methods=['GET', 'PUT', 'DELETE', 'OPTIONS', 'POST'])
 def handle_request(*args, **kwargs):
     response = lambda_handler(make_api_gateway_event())
 
