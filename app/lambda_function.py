@@ -1,5 +1,5 @@
 import json
-from aws_lambda_powertools.event_handler import APIGatewayRestResolver, CORSConfig
+from aws_lambda_powertools.event_handler import APIGatewayHttpResolver, CORSConfig
 from aws_lambda_powertools.event_handler.api_gateway import Router
 from services.nutritionist_service import NutritionistService
 from services.appointment_service import AppointmentService
@@ -57,8 +57,8 @@ def put_appointment_book(nutriId, appointmentId):
     return __appointment_service.put_appointments(body={'patientId': user_info.userId}, nutriId=nutriId, appointmentId=appointmentId)
 
 
-# Initialize APIGatewayRestResolver with CORS
-resolver = APIGatewayRestResolver(cors=cors_config)
+# Initialize APIGatewayHttpResolver with CORS
+resolver = APIGatewayHttpResolver(cors=cors_config)
 resolver.include_router(router=router, prefix="")
 
 def lambda_handler(event, context=None):
